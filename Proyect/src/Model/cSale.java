@@ -1,5 +1,5 @@
 package Model;
-public class csale {
+public class cSale {
         
     private String idSale; //idboleta
     private String date_BUY; // fecha
@@ -7,7 +7,7 @@ public class csale {
     private String idEmpleado;  // idempleado
     private double payment;   //total
 
-    public csale(String idSale, String date_BUY, String idCustome, String idEmpleado, double payment) {
+    public cSale(String idSale, String date_BUY, String idCustome, String idEmpleado, double payment) {
         this.idSale = idSale;
         this.date_BUY = date_BUY;
         this.idCustome = idCustome;
@@ -15,7 +15,7 @@ public class csale {
         this.payment =payment ;
     }
 
-    public csale() {
+    public cSale() {
         this.idSale = "0";
         payment=0.00;
     }
