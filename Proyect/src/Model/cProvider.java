@@ -1,28 +1,31 @@
 package Model;
 public class cProvider {
+  
+    private int idProvider;     
+    private String nameProvider;
+    private String addres;	
+    private String cell_phone;	
+    private String phone;	
+
     
 
-
-    private String idProvider;
-    private String nameProvider;
-    private String lastProvider;
-    private String phoneProvider;
-    private String descripcionProvider;
-
-
     public cProvider() {
-        this.idProvider = "0";
-        this.nameProvider = "";
-        this.lastProvider = "";
-        this.phoneProvider = "";
-        this.descripcionProvider = "";
+        this.idProvider = 0;
     }
 
-    public String getIdProveedor() {
+    public cProvider(int idProvider, String nameProvider, String addres, String cell_phone, String phone) {
+        this.idProvider = idProvider;
+        this.nameProvider = nameProvider;
+        this.addres = addres;
+        this.cell_phone = cell_phone;
+        this.phone = phone;
+    }
+    
+    public int getIdProvider() {
         return idProvider;
     }
 
-    public void setIdProvider(String idProvider) {
+    public void setIdProvider(int idProvider) {
         this.idProvider = idProvider;
     }
 
@@ -34,28 +37,28 @@ public class cProvider {
         this.nameProvider = nameProvider;
     }
 
-    public String getlastProvider() {
-        return lastProvider;
+    public String getAddres() {
+        return addres;
     }
 
-    public void setlastProvider(String lastProvider) {
-        this.lastProvider = lastProvider;
+    public void setAddres(String addres) {
+        this.addres = addres;
     }
 
-    public String getphoneProvider() {
-        return phoneProvider;
+    public String getCell_phone() {
+        return cell_phone;
     }
 
-    public void setphoneProvider(String phoneProvider) {
-        this.phoneProvider = phoneProvider;
+    public void setCell_phone(String cell_phone) {
+        this.cell_phone = cell_phone;
     }
 
-    public String getdescripcionProvider() {
-        return descripcionProvider;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setdescripcionProvider(String descripcionProvider) {
-        this.descripcionProvider = descripcionProvider;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
     

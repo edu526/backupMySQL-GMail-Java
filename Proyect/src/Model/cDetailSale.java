@@ -1,66 +1,54 @@
 package Model;
 public class cDetailSale {
     
-
-    private String idDetailSale; //iddetalle
+    private int idDetailSale; //iddetalle
     private int quantity;  //cantidad
     private double price; //preicounitario
-    private String idSale;  //idboleta
-    private String idProduc;  //idprofducto
-
-    public cDetailSale(String idDetailSale, int quantity, double price, String idSale, String idProduc) {
-        this.idDetailSale = idDetailSale;
-        this.quantity = quantity;
-        this.price= price;
-             this.idSale = idSale;
-        this.idProduc = idProduc;
-    }
+    private int Sale_idSale;  //idboleta
+    private int Product_idProduct;  //idprofducto
 
     public cDetailSale() {
-        idDetailSale="0";
+        idDetailSale=0;
     }
 
-    public String getIdDetailSale() {
+    public int getIdDetailSale() {
         return idDetailSale;
     }
 
-    public void setIdDetailSale(String idDetailSale) {
+    public void setIdDetailSale(int idDetailSale) {
         this.idDetailSale = idDetailSale;
     }
 
-    public int getquantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setquantity(int quantity) {
-        this.quantity= quantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getprice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setprice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    
-    public String getIdidSale() {
-        return idSale;
+    public int getSale_idSale() {
+        return Sale_idSale;
     }
 
-    public void setIdidSale(String idSale) {
-        this.idSale = idSale;
+    public void setSale_idSale(int Sale_idSale) {
+        this.Sale_idSale = Sale_idSale;
     }
 
-    public String getIdProduc() {
-        return idProduc;
+    public int getProduct_idProduct() {
+        return Product_idProduct;
     }
 
-    public void setIdProduc(String idProduc) {
-        this.idProduc = idProduc;
+    public void setProduct_idProduct(int Product_idProduct) {
+        this.Product_idProduct = Product_idProduct;
     }
-    
-    
-    
+
 }

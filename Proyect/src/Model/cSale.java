@@ -1,55 +1,28 @@
 package Model;
+
+import java.sql.Date;
+
 public class cSale {
         
-    private String idSale; //idboleta
-    private String date_BUY; // fecha
-    private String idCustome; // id cliente 
-    private String idEmpleado;  // idempleado
-    private double payment;   //total
+    private int idSale; //idboleta
+    private double payment; // fecha
+    private Date date_buy; // id cliente 
+    private int Customer_idCustomer;  // idempleado
+    private int Employee_idEmployee;   //total
 
-    public cSale(String idSale, String date_BUY, String idCustome, String idEmpleado, double payment) {
-        this.idSale = idSale;
-        this.date_BUY = date_BUY;
-        this.idCustome = idCustome;
-        this.idEmpleado = idEmpleado;
-        this.payment =payment ;
-    }
+
 
     public cSale() {
-        this.idSale = "0";
+        this.idSale = 0;
         payment=0.00;
     }
-    
-    public String getIdsale() {
+
+    public int getIdSale() {
         return idSale;
     }
 
-    public void setIdSale(String idSale) {
+    public void setIdSale(int idSale) {
         this.idSale = idSale;
-    }
-
-    public String getDate_BUY() {
-        return date_BUY;
-    }
-
-    public void setDate_BUY(String date_BUY) {
-        this.date_BUY = date_BUY;
-    }
-
-    public String getIdCustome() {
-        return idCustome;
-    }
-
-    public void setIdCustome(String idCustome) {
-        this.idCustome = idCustome;
-    }
-
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
     }
 
     public double getPayment() {
@@ -59,4 +32,29 @@ public class cSale {
     public void setPayment(double payment) {
         this.payment = payment;
     }
+
+    public Date getDate_buy() {
+        return date_buy;
+    }
+
+    public void setDate_buy(Date date_buy) {
+        this.date_buy = date_buy;
+    }
+
+    public int getCustomer_idCustomer() {
+        return Customer_idCustomer;
+    }
+
+    public void setCustomer_idCustomer(int Customer_idCustomer) {
+        this.Customer_idCustomer = Customer_idCustomer;
+    }
+
+    public int getEmployee_idEmployee() {
+        return Employee_idEmployee;
+    }
+
+    public void setEmployee_idEmployee(int Employee_idEmployee) {
+        this.Employee_idEmployee = Employee_idEmployee;
+    }
+    
   }
