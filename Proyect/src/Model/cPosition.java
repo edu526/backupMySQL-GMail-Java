@@ -1,49 +1,48 @@
 package Model;
 public class cPosition {
 
-    private String idPosition; //cargo
+    private int idPosition; //cargo
     private String namePosition;  //nombre del cargo
-    private double salary; //sueldo cargo
     private String description; //descripcion de cargo 
+    private double salary; //sueldo cargo
 
     public cPosition() {
-        this.idPosition = "0";
+        this.idPosition = 0;
         this.namePosition = "";
         this.salary = 0.00;
         this.description= "";
     }
 
-    public String getidPosition() {
+    public int getIdPosition() {
         return idPosition;
     }
 
-    public void setidPosition(String idPosition) {
+    public void setIdPosition(int idPosition) {
         this.idPosition = idPosition;
     }
 
-    public String getnamePosition() {
+    public String getNamePosition() {
         return namePosition;
     }
 
-    public void setNomCargo(String namePosition) {
+    public void setNamePosition(String namePosition) {
         this.namePosition = namePosition;
     }
 
-    public double getsalary() {
-        return salary;
-    }
-
-    public void setsalary(double salary) {
-        this.salary = salary;
-    }
-
-    public String getdescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setdescription(String description) {
-        this.description= description;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    
-    
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
 }
