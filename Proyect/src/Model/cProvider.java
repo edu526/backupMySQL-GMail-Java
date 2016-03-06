@@ -1,7 +1,7 @@
 package Model;
 public class cProvider {
     
-}
+
 
     private String idProvider;
     private String nameProvider;
@@ -10,12 +10,12 @@ public class cProvider {
     private String descripcionProvider;
 
 
-    public cProveedor() {
+    public cProvider() {
         this.idProvider = "0";
-        this.nomProveedor = "";
-        this.direcProveedor = "";
+        this.nameProvider = "";
+        this.lastProvider = "";
         this.phoneProvider = "";
-        this.descripcionProveedor = "";
+        this.descripcionProvider = "";
     }
 
     public String getIdProveedor() {
@@ -34,28 +34,28 @@ public class cProvider {
         this.nameProvider = nameProvider;
     }
 
-    public String getDirecProveedor() {
-        return direcProveedor;
+    public String getlastProvider() {
+        return lastProvider;
     }
 
-    public void setDirecProveedor(String direcProveedor) {
-        this.direcProveedor = direcProveedor;
+    public void setlastProvider(String lastProvider) {
+        this.lastProvider = lastProvider;
     }
 
-    public String getTelfProveedor() {
-        return telfProveedor;
+    public String getphoneProvider() {
+        return phoneProvider;
     }
 
-    public void setTelfProveedor(String telfProveedor) {
-        this.telfProveedor = telfProveedor;
+    public void setphoneProvider(String phoneProvider) {
+        this.phoneProvider = phoneProvider;
     }
 
-    public String getDescripcionProveedor() {
-        return descripcionProveedor;
+    public String getdescripcionProvider() {
+        return descripcionProvider;
     }
 
-    public void setDescripcionProveedor(String descripcionProveedor) {
-        this.descripcionProveedor = descripcionProveedor;
+    public void setdescripcionProvider(String descripcionProvider) {
+        this.descripcionProvider = descripcionProvider;
     }
     
     
