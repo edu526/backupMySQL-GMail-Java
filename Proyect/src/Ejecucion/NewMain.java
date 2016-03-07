@@ -5,12 +5,17 @@
  */
 package Ejecucion;
 
-import DAO.*;
-
 /**
  *
  * @author dexter
  */
-public class NewClass {
+public class NewMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
     
 }
