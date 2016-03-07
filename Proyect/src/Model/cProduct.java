@@ -3,7 +3,6 @@ public class cProduct {
     
     private int idProduct;
     private String nameProduct;
-    private int stock;
     private double price;
     private int quantity;
     private int Category_idCategory;
@@ -11,16 +10,6 @@ public class cProduct {
 
     public cProduct() {
         idProduct=0;
-    }
-
-    public cProduct(int idProduct, String nameProduct, int stock, double price, int quantity, int Category_idCategory, int Provider_idProvider) {
-        this.idProduct = idProduct;
-        this.nameProduct = nameProduct;
-        this.stock = stock;
-        this.price = price;
-        this.quantity = quantity;
-        this.Category_idCategory = Category_idCategory;
-        this.Provider_idProvider = Provider_idProvider;
     }
 
     public int getIdProduct() {
@@ -37,14 +26,6 @@ public class cProduct {
 
     public void setNameProduct(String nameProduct) {
         this.nameProduct = nameProduct;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public double getPrice() {
