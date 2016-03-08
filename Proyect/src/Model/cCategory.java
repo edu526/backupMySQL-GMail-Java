@@ -15,7 +15,7 @@ public class cCategory {
         this.idCategory = 0;
     }
 
-    public int getIdCategoria() {
+    public int getIdCategory() {
         return idCategory;
     }
 

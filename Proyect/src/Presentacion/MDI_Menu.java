@@ -1,8 +1,8 @@
 package Presentacion;
 
 import Factory.FactoryConnectionDb;
-import dao.CargoDao;
-import dao.CargoDaoImp;
+import DAO.PositionDao;
+import DAO.PositionDaoImp;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.Calendar;
@@ -17,8 +17,7 @@ import javax.swing.JPanel;
 import reporte.CReporte;
 
 public class MDI_Menu extends javax.swing.JFrame implements Runnable{
-    ResourceBundle bundle;
-    CargoDao cargodao_ = new CargoDaoImp();
+    PositionDao cargodao_ = new PositionDaoImp();
     Object[][] o;
     
     //reloj
@@ -30,15 +29,13 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     public MDI_Menu() {
         initComponents();
         
-        traducir();
-        //mostrar reloj
-        
+        //mostrar reloj        
         h1 = new Thread(this);
         h1.start();
         
         //setLocationRelativeTo(null);//centrar el software
         setExtendedState(JFrame.MAXIMIZED_BOTH); //extender frame
-        setTitle(bundle.getString("menu.tituloMenu.text")); //titulo del software
+        setTitle("Software"); //titulo del software
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.jpg")).getImage());//cambiar de icono al software
         ((JPanel)getContentPane()).setOpaque(false); 
         ImageIcon uno=new ImageIcon(this.getClass().getResource("/imagenes/fondo01.png"));
@@ -50,53 +47,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         this.add(fondo, BorderLayout.CENTER);        
     }
 
-    public void traducir(){
-        if(FactoryConnectionDb.idioma==0) 
-            bundle = ResourceBundle.getBundle("Propiedades/es_PE");
-        else bundle = ResourceBundle.getBundle("Propiedades/eu_EU");
-        
-        setTitle(bundle.getString("menu.tituloMenu.text")); //titulo del software
-        
-        menuCliente.setText(bundle.getString("menu.menuCliente.text"));
-        menuClienteControl.setText(bundle.getString("menu.menuControlCliente.text"));
-        menuClienteReporte.setText(bundle.getString("menu.menuReporteCliente.text"));
-        
-        menuProducto.setText(bundle.getString("menu.menuProducto.text"));
-        menuProductoControl.setText(bundle.getString("menu.menuControlProducto.text"));
-        menuReporteProducto.setText(bundle.getString("menu.menuReporteProducto.text"));
-        menuCategoria.setText(bundle.getString("menu.menuCategoria.text"));
-        menuProveedor.setText(bundle.getString("menu.menuProveedor.text"));
-        menuLaboratorio.setText(bundle.getString("menu.menuLaboratorio.text"));
-        menuCatego.setText(bundle.getString("menu.menuCategoria.text"));
-        menuProve.setText(bundle.getString("menu.menuProveedor.text"));
-        menuLabo.setText(bundle.getString("menu.menuLaboratorio.text"));
-        
-        menuEmpleado.setText(bundle.getString("menu.menuEmpleado.text"));
-        menuEmpleadoControl.setText(bundle.getString("menu.menuControlEmpleado.text"));
-        menuEmpleadoReporte.setText(bundle.getString("menu.menuReporteEmpleado.text"));
-        menuCargo.setText(bundle.getString("menu.menuReporteCargo.text"));
-        menuCar.setText(bundle.getString("menu.menuReporteCargo.text"));
-        
-        menuVenta.setText(bundle.getString("menu.menuVenta.text"));
-        menuVentaVenta.setText(bundle.getString("menu.menuVenta.text"));
-        menuVentaReporte.setText(bundle.getString("menu.menuReporteVenta.text"));
-        menuVerBoleta.setText(bundle.getString("menu.menuVerBoleta.text"));
-        
-        menuUsuario.setText(bundle.getString("menu.menuUsuario.text"));
-        menuControlUsuario.setText(bundle.getString("menu.menuUsuarioControl.text"));
-        
-        menuHerramienta.setText(bundle.getString("menu.menuHerramienta.text"));
-        menuCalculadora.setText(bundle.getString("menu.menuCalculadora.text"));
-        menuBloc.setText(bundle.getString("menu.menuBloc.text"));
-       
-        menuConfiguracion.setText(bundle.getString("menu.menuConfiguracion.text"));
-        lblIdiomaEs.setText(bundle.getString("menu.lblIdiomaEs.text"));
-        lblIdiomaEu.setText(bundle.getString("menu.lblIdiomaEu.text"));
-        lblIdioma.setText(bundle.getString("menu.lblIdioma.text"));
-        menuCerrarSesion.setText(bundle.getString("menu.menuCerrarSesion.text"));
-        menuSalir.setText(bundle.getString("menu.menuSalir.text"));        
-        menuCambiarcontrasenia.setText(bundle.getString("menu.menuCambiarContraseina.text"));
-    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,9 +68,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         menuProve = new javax.swing.JMenu();
         menuProveedor = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        menuLabo = new javax.swing.JMenu();
-        menuLaboratorio = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         menuEmpleado = new javax.swing.JMenu();
         menuEmpleadoControl = new javax.swing.JMenuItem();
         menuEmpleadoReporte = new javax.swing.JMenuItem();
@@ -136,9 +84,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         menuCalculadora = new javax.swing.JMenuItem();
         menuBloc = new javax.swing.JMenuItem();
         menuConfiguracion = new javax.swing.JMenu();
-        lblIdioma = new javax.swing.JMenu();
-        lblIdiomaEs = new javax.swing.JRadioButtonMenuItem();
-        lblIdiomaEu = new javax.swing.JRadioButtonMenuItem();
         menuCambiarcontrasenia = new javax.swing.JMenuItem();
         menuCerrarSesion = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenuItem();
@@ -260,26 +205,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
 
         menuProducto.add(menuProve);
 
-        menuLabo.setText("Laboratorio");
-
-        menuLaboratorio.setText("Laboratorio");
-        menuLaboratorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuLaboratorioActionPerformed(evt);
-            }
-        });
-        menuLabo.add(menuLaboratorio);
-
-        jMenuItem4.setText("Reporte");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        menuLabo.add(jMenuItem4);
-
-        menuProducto.add(menuLabo);
-
         jMenuBar1.add(menuProducto);
 
         menuEmpleado.setText("Empleado");
@@ -400,29 +325,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
 
         menuConfiguracion.setText("Configuración");
 
-        lblIdioma.setText("Lenguaje");
-
-        buttonGroup1.add(lblIdiomaEs);
-        lblIdiomaEs.setSelected(true);
-        lblIdiomaEs.setText("Español");
-        lblIdiomaEs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblIdiomaEsActionPerformed(evt);
-            }
-        });
-        lblIdioma.add(lblIdiomaEs);
-
-        buttonGroup1.add(lblIdiomaEu);
-        lblIdiomaEu.setText("Ingles");
-        lblIdiomaEu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblIdiomaEuActionPerformed(evt);
-            }
-        });
-        lblIdioma.add(lblIdiomaEu);
-
-        menuConfiguracion.add(lblIdioma);
-
         menuCambiarcontrasenia.setText("Cambiar contraseña");
         menuCambiarcontrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -468,7 +370,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuClienteControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClienteControlActionPerformed
-        frmCliente bol=new frmCliente();
+        frmCustomer bol=new frmCustomer();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuClienteControlActionPerformed
@@ -500,7 +402,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuProductoMouseClicked
 
     private void menuEmpleadoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpleadoControlActionPerformed
-        frmEmpleado bol=new frmEmpleado();
+        frmEmployee bol=new frmEmployee();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuEmpleadoControlActionPerformed
@@ -567,18 +469,8 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         bol.show();
     }//GEN-LAST:event_menuCargoActionPerformed
 
-    private void lblIdiomaEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblIdiomaEsActionPerformed
-        FactoryConnectionDb.idioma = 0;
-        traducir();
-    }//GEN-LAST:event_lblIdiomaEsActionPerformed
-
-    private void lblIdiomaEuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblIdiomaEuActionPerformed
-        FactoryConnectionDb.idioma = 1;
-        traducir();
-    }//GEN-LAST:event_lblIdiomaEuActionPerformed
-
     private void menuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesionActionPerformed
-        acceso x = new acceso();
+        access x = new access();
         x.setVisible(true);
         dispose();
     }//GEN-LAST:event_menuCerrarSesionActionPerformed
@@ -606,16 +498,10 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuVentaReporteActionPerformed
 
     private void menuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCategoriaActionPerformed
-        frmCategoria bol=new frmCategoria();
+        frmCategory bol=new frmCategory();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuCategoriaActionPerformed
-
-    private void menuLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLaboratorioActionPerformed
-       frmLaboratorio bol=new frmLaboratorio();
-        panel_principal.add(bol);
-        bol.show();
-    }//GEN-LAST:event_menuLaboratorioActionPerformed
 
     private void menuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProveedorActionPerformed
         frmProveedor bol=new frmProveedor();
@@ -641,10 +527,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         new CReporte().reporteCategoria();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new CReporte().reporteLaboratorio();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -653,10 +535,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenu lblIdioma;
-    private javax.swing.JRadioButtonMenuItem lblIdiomaEs;
-    private javax.swing.JRadioButtonMenuItem lblIdiomaEu;
     private javax.swing.JLabel lblhora;
     private javax.swing.JMenuItem menuBloc;
     private javax.swing.JMenuItem menuCalculadora;
@@ -675,8 +553,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     private javax.swing.JMenuItem menuEmpleadoControl;
     private javax.swing.JMenuItem menuEmpleadoReporte;
     private javax.swing.JMenu menuHerramienta;
-    private javax.swing.JMenu menuLabo;
-    private javax.swing.JMenuItem menuLaboratorio;
     private javax.swing.JMenu menuProducto;
     private javax.swing.JMenuItem menuProductoControl;
     private javax.swing.JMenu menuProve;

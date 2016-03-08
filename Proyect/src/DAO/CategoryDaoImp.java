@@ -63,7 +63,7 @@ public class CategoryDaoImp implements CategoryDao{
                 sql.append("update category set ").
                 append("nameCategory='").append(p.getNameCategory()).append("',").
                 append("description='").append(p.getDescription()).append("'").
-                append(" where idCategoria=");sql.append(p.getIdCategoria());                 
+                append(" where idCategoria=");sql.append(p.getIdCategory());                 
                 this.conn.execute(sql.toString()); 
             }catch(Exception e){
                  e.printStackTrace();
