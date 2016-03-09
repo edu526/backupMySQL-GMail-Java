@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import reporte.CReporte;
+//import reporte.CReporte;
 
 public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     PositionDao cargodao_ = new PositionDaoImp();
@@ -357,13 +357,11 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel_principal)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel_principal, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_principal)
+            .addComponent(panel_principal, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
 
         pack();
@@ -376,9 +374,9 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuClienteControlActionPerformed
 
     private void menuClienteReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClienteReporteActionPerformed
-        frmReporteCliente c=new frmReporteCliente();
-        panel_principal.add(c);
-        c.setVisible(true);
+        //frmReporteCliente c=new frmReporteCliente();
+        //panel_principal.add(c);
+        //c.setVisible(true);
     }//GEN-LAST:event_menuClienteReporteActionPerformed
 
     private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
@@ -386,15 +384,15 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuClienteMouseClicked
 
     private void menuProductoControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProductoControlActionPerformed
-        frmProducto c=new frmProducto();
+        frmProduct c=new frmProduct();
         panel_principal.add(c);
         c.show();
     }//GEN-LAST:event_menuProductoControlActionPerformed
 
     private void menuReporteProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReporteProductoActionPerformed
-        frmReporteProducto l=new frmReporteProducto();
-        panel_principal.add(l);
-        l.setVisible(true);
+//        frmReporteProducto l=new frmReporteProducto();
+//        panel_principal.add(l);
+//        l.setVisible(true);
     }//GEN-LAST:event_menuReporteProductoActionPerformed
 
     private void menuProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProductoMouseClicked
@@ -408,7 +406,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuEmpleadoControlActionPerformed
 
     private void menuEmpleadoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpleadoReporteActionPerformed
-        new CReporte().imprimirEmpleado();
+        //new CReporte().imprimirEmpleado();
     }//GEN-LAST:event_menuEmpleadoReporteActionPerformed
 
     private void menuEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmpleadoMouseClicked
@@ -416,7 +414,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuEmpleadoMouseClicked
 
     private void menuVentaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVentaVentaActionPerformed
-        frmBoleta bol=new frmBoleta();
+        frmSale bol=new frmSale();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuVentaVentaActionPerformed
@@ -430,11 +428,13 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuCalculadoraMouseClicked
 
     private void menuCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalculadoraActionPerformed
+        long va = 1;
         try
         {
             Runtime rt=Runtime.getRuntime();
             Process p =rt.exec("calc");
-            p.waitFor();
+            p.waitFor(va, TimeUnit.SECONDS);
+
 
         }
         catch (IOException ioe )
@@ -447,12 +447,12 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuCalculadoraActionPerformed
 
     private void menuBlocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBlocActionPerformed
+        long va = 1;
         try
         {
             Runtime rt=Runtime.getRuntime();
             Process p =rt.exec("notepad");
-            p.waitFor();
-
+            p.waitFor(va, TimeUnit.SECONDS);
         }
         catch (IOException ioe )
         {
@@ -464,7 +464,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuBlocActionPerformed
 
     private void menuCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCargoActionPerformed
-        frmCargo bol=new frmCargo();
+        frmPosition bol=new frmPosition();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuCargoActionPerformed
@@ -480,21 +480,21 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void menuCambiarcontraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCambiarcontraseniaActionPerformed
-        frmCambiarContrasenia x = new frmCambiarContrasenia();
+        frmChangePassword x = new frmChangePassword();
         panel_principal.add(x);
         x.show(true);
     }//GEN-LAST:event_menuCambiarcontraseniaActionPerformed
 
     private void menuControlUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuControlUsuarioActionPerformed
-        frmNuevoUsuario bol=new frmNuevoUsuario();
+        frmNewUser bol=new frmNewUser();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuControlUsuarioActionPerformed
 
     private void menuVentaReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVentaReporteActionPerformed
-        frmReporteBoleta bol=new frmReporteBoleta();
-        panel_principal.add(bol);
-        bol.show();
+//        frmReporteBoleta bol=new frmReporteBoleta();
+//        panel_principal.add(bol);
+//        bol.show();
     }//GEN-LAST:event_menuVentaReporteActionPerformed
 
     private void menuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCategoriaActionPerformed
@@ -504,7 +504,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuCategoriaActionPerformed
 
     private void menuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProveedorActionPerformed
-        frmProveedor bol=new frmProveedor();
+        frmProvider bol=new frmProvider();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuProveedorActionPerformed
@@ -516,15 +516,15 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuVerBoletaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new CReporte().reporteCargo();
+//        new CReporte().reporteCargo();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new CReporte().reporteProveedor();
+    //    new CReporte().reporteProveedor();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new CReporte().reporteCategoria();
+      //  new CReporte().reporteCategoria();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
   

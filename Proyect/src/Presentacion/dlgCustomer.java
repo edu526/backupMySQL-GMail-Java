@@ -12,6 +12,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import Model.cCustomer;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class dlgCustomer extends javax.swing.JDialog {
 
@@ -37,9 +40,14 @@ public class dlgCustomer extends javax.swing.JDialog {
         lblId.setText(id+"");
         txtnombre.setText(cliente_.getNameCustomer());
         txtapellidoPa.setText(cliente_.getLast_name());
-
-            dateC.setDate(cliente_.getBirthdate());
-        
+        try {
+            Date date = new SimpleDateFormat("yyy-MM-dd").parse(cliente_.getBirthdate());
+            dateC.setDate(date);
+        } catch (NullPointerException ex) {
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(dlgCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         txtDNI.setText(cliente_.getDni());
         if ((cliente_.getSex()+"").equals("m")) {
             rbMas.setSelected(true);            
@@ -181,7 +189,7 @@ public class dlgCustomer extends javax.swing.JDialog {
         buttonGroup1.add(rbFe);
         rbFe.setText("Femenino");
 
-        dateC.setDateFormatString("yyyy-MM-dd");
+        dateC.setDateFormatString("yyy-MM-dd");
         dateC.setMaxSelectableDate(new java.util.Date(852098486000L));
         dateC.setMinSelectableDate(new java.util.Date(-631130314000L));
 
@@ -367,7 +375,7 @@ public class dlgCustomer extends javax.swing.JDialog {
             cliente_.setIdCustomer(Integer.parseInt(lblId.getText()));
             cliente_.setNameCustomer(txtnombre.getText());
             cliente_.setLast_name(txtapellidoPa.getText());
-            cliente_.setBirthdate((java.sql.Date) datE);
+            cliente_.setBirthdate(fechaC);
             cliente_.setDni(txtDNI.getText());
             cliente_.setSex((rbMas.isSelected())?"m":"f");
             cliente_.setPhone(txttelefono.getText());

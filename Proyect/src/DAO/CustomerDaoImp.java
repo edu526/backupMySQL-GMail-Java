@@ -28,7 +28,7 @@ public class CustomerDaoImp implements CustomerDao{
                 p.setDni(rs.getString("dni"));
                 p.setCell_phone(rs.getString("cell_phone"));
                 p.setPhone(rs.getString("phone"));
-                p.setBirthdate(rs.getDate("birthdate"));
+                p.setBirthdate(rs.getString("birthdate"));
                 p.setEmail(rs.getString("email"));
                 p.setSex(rs.getString("sex"));
                 _list.add(p);
@@ -83,7 +83,7 @@ public class CustomerDaoImp implements CustomerDao{
                 append("birthdate='").append(p.getBirthdate()).append("',").
                 append("email='").append(p.getEmail()).append("',").
                 append("sex='").append(p.getSex()).append("' ").
-                append("where idCliente=");sql.append(p.getIdCustomer());                 
+                append("where idCustomer=");sql.append(p.getIdCustomer());                 
                 this.conn.execute(sql.toString()); 
             }catch(Exception e){
                  e.printStackTrace();
@@ -126,7 +126,7 @@ public class CustomerDaoImp implements CustomerDao{
                 p.setDni(rs.getString("dni"));
                 p.setCell_phone(rs.getString("cell_phone"));
                 p.setPhone(rs.getString("phone"));
-                p.setBirthdate(rs.getDate("birthdate"));
+                p.setBirthdate(rs.getString("birthdate"));
                 p.setEmail(rs.getString("email"));
                 p.setSex(rs.getString("sex"));        
              }

@@ -3,8 +3,8 @@
 package Presentacion;
 
 import Factory.FactoryConnectionDb;
-import dao.CargoDao;
-import dao.CargoDaoImp;
+import DAO.PositionDao;
+import DAO.PositionDaoImp;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
@@ -12,11 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.cCargo;
+import Model.cPosition;
 
-public class dlgCargo extends javax.swing.JDialog {
+public class dlgPosition extends javax.swing.JDialog {
 
-    public dlgCargo(java.awt.Frame parent, boolean modal,cCargo cargo_) {
+    public dlgPosition(java.awt.Frame parent, boolean modal,cPosition cargo_) {
         super(parent, modal);
         initComponents();
         
@@ -29,13 +29,13 @@ public class dlgCargo extends javax.swing.JDialog {
         fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
         this.add(fondo, BorderLayout.CENTER);
    
-        int id =Integer.parseInt(cargo_.getIdCargo());
+        int id =cargo_.getIdPosition();
         btnNuevo.setText(id==0?"Agregar":"Modificar");
         btnEliminar.setVisible(id>0);
-        lblCodigo.setText(cargo_.getIdCargo());
-        txtnombre.setText(cargo_.getNomCargo());
-        txtSueldo1.setText(cargo_.getSueldoCargo()+"");
-        txtDescripcion1.setText(cargo_.getDescripcionCargo());
+        lblCodigo.setText(cargo_.getIdPosition()+"");
+        txtnombre.setText(cargo_.getNamePosition());
+        txtSueldo1.setText(cargo_.getSalary()+"");
+        txtDescripcion1.setText(cargo_.getDescription());
             
     }
 
@@ -195,8 +195,8 @@ public class dlgCargo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        CargoDao cargodao = new CargoDaoImp();
-        cCargo cargo_ = new cCargo();
+        PositionDao cargodao = new PositionDaoImp();
+        cPosition cargo_ = new cPosition();
         
         
         if(txtnombre.getText().trim().length()==0){
@@ -206,17 +206,17 @@ public class dlgCargo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Error en el ingreso del sueldo",FactoryConnectionDb.Mensaje,JOptionPane.ERROR_MESSAGE);
             txtSueldo1.requestFocus();
         }else{
-            cargo_.setIdCargo(lblCodigo.getText());
-            cargo_.setNomCargo(txtnombre.getText());
-            cargo_.setSueldoCargo(Double.parseDouble(txtSueldo1.getText()));
-            cargo_.setDescripcionCargo(txtDescripcion1.getText());
+            cargo_.setIdPosition(Integer.parseInt(lblCodigo.getText()));
+            cargo_.setNamePosition(txtnombre.getText());
+            cargo_.setSalary(Double.parseDouble(txtSueldo1.getText()));
+            cargo_.setDescription(txtDescripcion1.getText());
             
-            if(Integer.parseInt(cargo_.getIdCargo())>0){
-                cargodao.modificar(cargo_);                
+            if(cargo_.getIdPosition()>0){
+                cargodao.update(cargo_);                
                 JOptionPane.showMessageDialog(null, "Datos del Cargo modificados correctamente",FactoryConnectionDb.Mensaje,JOptionPane.INFORMATION_MESSAGE);
             }                
             else{
-                cargodao.insertar(cargo_);
+                cargodao.insert(cargo_);
                 JOptionPane.showMessageDialog(null, "Datos del Cargo ingresados correctamente",FactoryConnectionDb.Mensaje,JOptionPane.INFORMATION_MESSAGE);
             }
             dispose();            
@@ -227,8 +227,8 @@ public class dlgCargo extends javax.swing.JDialog {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog (null, "Desea eliminar este cargo?",FactoryConnectionDb.Mensaje,JOptionPane.YES_NO_OPTION);
         if(JOptionPane.YES_OPTION==confirmacion){
-            CargoDao mensajedao = new CargoDaoImp();
-            mensajedao.eliminar(Integer.parseInt(lblCodigo.getText()));
+            PositionDao mensajedao = new PositionDaoImp();
+            mensajedao.delete(Integer.parseInt(lblCodigo.getText()));
             JOptionPane.showMessageDialog(null, "Cargo eliminado ",FactoryConnectionDb.Mensaje,JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }

@@ -68,9 +68,9 @@ public class access extends javax.swing.JFrame {
         lblContraseña.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblContraseña.setText("CONTRASEÑA:");
 
-        txtUsuario.setText("admin");
+        txtUsuario.setText("master");
 
-        txtContraseña.setText("admin");
+        txtContraseña.setText("master");
         txtContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseñaActionPerformed(evt);

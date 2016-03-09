@@ -1,24 +1,19 @@
 package Presentacion;
 
-import dao.CargoDaoImp;
-import dao.CargoDao;
+import DAO.ProductDao;
+import DAO.ProductDaoImp;
 import java.awt.BorderLayout;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import model.cCargo;
+import Model.cProduct;
 
-public class frmCargo extends javax.swing.JInternalFrame {
-
-    CargoDao cargodao_ = new CargoDaoImp();
-   Object[][] o;
-    public frmCargo() {
+public class frmProduct extends javax.swing.JInternalFrame {
+    ProductDao productodao_ = new ProductDaoImp();
+    Object[][] o;
+    public frmProduct() {
         initComponents();
-        
-          setTitle("Cargo"); //titulo del software
+        setTitle("Producto"); //titulo del software
         ((JPanel)getContentPane()).setOpaque(false); 
         ImageIcon uno=new ImageIcon(this.getClass().getResource("/imagenes/fondo02.png"));
         JLabel fondo= new JLabel(); 
@@ -26,19 +21,19 @@ public class frmCargo extends javax.swing.JInternalFrame {
         getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER);
         fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
         this.add(fondo, BorderLayout.CENTER);
-   
+        
         listar("");
+                
     }
-
-     private void listar(String texto){
-        List<cCargo> list = cargodao_.list(texto);
+    private void listar(String texto){
+        List<cProduct> list = productodao_.list(texto);
         o =new Object[4][list.size()];
         int i = 0;
-        for (cCargo tr : list) {            
-            o[0][i]=tr.getIdCargo()+"";
-            o[1][i]=tr.getNomCargo();
-            o[2][i]=tr.getSueldoCargo();
-            o[3][i]=tr.getDescripcionCargo();  
+        for (cProduct tr : list) {            
+            o[0][i]=tr.getIdProduct()+"";
+            o[1][i]=tr.getNameProduct();
+            o[2][i]=tr.getPrice();
+            o[3][i]=tr.getQuantity();  
             i++;
         }
         
@@ -52,25 +47,37 @@ public class frmCargo extends javax.swing.JInternalFrame {
                 }
                }
         };
-        modelo.addColumn("idCargo",o[0]);
+        modelo.addColumn("idProducto",o[0]);
         modelo.addColumn("Nombre",o[1]);
-        modelo.addColumn("Sueldo",o[2]);
-        modelo.addColumn("Descripcion",o[3]);
+        modelo.addColumn("Precio",o[2]);
+        modelo.addColumn("Cantidad",o[3]);
         
         jTable1.setModel(modelo);
         
     }
 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtbuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txtbuscar = new javax.swing.JTextField();
         btnnuevo = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
+        setIconifiable(true);
+        setTitle("Producto");
+        setToolTipText("");
+        setAutoscrolls(true);
+
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,12 +97,6 @@ public class frmCargo extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyReleased(evt);
-            }
-        });
-
         btnnuevo.setText("Nuevo");
         btnnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +108,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 458, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -123,7 +124,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+            .addGap(0, 306, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -135,30 +136,31 @@ public class frmCargo extends javax.swing.JInternalFrame {
                             .addComponent(btnnuevo)
                             .addGap(5, 5, 5)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(19, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int idCargo = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
-        CargoDao trabajadordao = new CargoDaoImp();
-        dlgCargo dialog = new dlgCargo(new javax.swing.JFrame(), true,trabajadordao.buscar(idCargo));
-        dialog.setVisible(true);
-        listar("");
-    }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
         if(txtbuscar.getText().trim().length()>0)
         listar(txtbuscar.getText().trim());
     }//GEN-LAST:event_txtbuscarKeyReleased
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int idProducto = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
+        ProductDao productodao = new ProductDaoImp();
+        dlgProduct dialog = new dlgProduct(new javax.swing.JFrame(), true,productodao.search(idProducto));
+        dialog.setVisible(true);
+        listar("");
+    }//GEN-LAST:event_jTable1MouseClicked
+
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-        dlgCargo dialog = new dlgCargo(new javax.swing.JFrame(), true,new cCargo());
+        dlgProduct dialog = new dlgProduct(new javax.swing.JFrame(), true,new cProduct());
         dialog.setVisible(true);
         listar("");
     }//GEN-LAST:event_btnnuevoActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -167,4 +169,5 @@ public class frmCargo extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
+
 }

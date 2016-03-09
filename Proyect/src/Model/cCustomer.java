@@ -1,7 +1,5 @@
 package Model;
 
-import java.sql.Date;
-
 public class cCustomer {
        
     private int idCustomer;                 //idCustomer int auto_increment primary key,
@@ -10,7 +8,7 @@ public class cCustomer {
     private String dni;           //dni varchar(8) not null,
     private String cell_phone;          //cell_phone varchar(9),
     private String phone;               //phone varchar(7),
-    private Date birthdate;                 //birthdate date not null,
+    private String birthdate;                 //birthdate date not null,
     private String email;   	//email varchar(60),
     private String sex;   	//email varchar(60),
 
@@ -66,11 +64,11 @@ public class cCustomer {
         this.phone = phone;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
