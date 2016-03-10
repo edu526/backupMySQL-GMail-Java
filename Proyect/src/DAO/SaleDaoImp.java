@@ -24,7 +24,7 @@ public class SaleDaoImp implements SaleDao{
                 cSale p = new cSale();
                 p.setIdSale(rs.getInt("idSale"));
                 p.setPayment(rs.getDouble("payment"));
-                p.setDate_buy(rs.getDate("date_buy"));
+                p.setDate_buy(rs.getString("date_buy"));
                 p.setCustomer_idCustomer(rs.getInt("Customer_idCustomer"));
                 p.setEmployee_idEmployee(rs.getInt("Employee_idEmployee"));
                 _list.add(p);
@@ -108,7 +108,7 @@ public class SaleDaoImp implements SaleDao{
              while(rs.next()){
                 p.setIdSale(rs.getInt("idSale"));
                 p.setPayment(rs.getDouble("payment"));
-                p.setDate_buy(rs.getDate("date_buy"));
+                p.setDate_buy(rs.getString("date_buy"));
                 p.setCustomer_idCustomer(rs.getInt("Customer_idCustomer"));             
                 p.setEmployee_idEmployee(rs.getInt("Employee_idEmployee"));  
              }

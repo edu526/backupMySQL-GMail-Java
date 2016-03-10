@@ -510,7 +510,7 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_menuProveedorActionPerformed
 
     private void menuVerBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerBoletaActionPerformed
-        frmVerBoletas bol=new frmVerBoletas();
+        frmViewSale bol=new frmViewSale();
         panel_principal.add(bol);
         bol.show();
     }//GEN-LAST:event_menuVerBoletaActionPerformed

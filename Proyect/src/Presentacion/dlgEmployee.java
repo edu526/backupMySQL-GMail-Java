@@ -11,8 +11,6 @@ import DAO.PositionDaoImp;
 import DAO.EmployeeDao;
 import DAO.EmployeeDaoImp;
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +23,9 @@ import Model.cPosition;
 import Model.cEmployee;
 import Model.cEmployee;
 import Model.cPosition;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,7 +60,11 @@ public class dlgEmployee extends javax.swing.JDialog {
         lblId.setText(id+"");
         txtnombre.setText(empleado_.getNameEmployee());
         txtapellidoPa.setText(empleado_.getLast_name());
-        dateC.setDate(empleado_.getBirthdate());
+        try {
+            Date date = new SimpleDateFormat("yyy-MM-dd").parse(empleado_.getBirthdate());
+            dateC.setDate(date);
+        } catch (NullPointerException ex) {} 
+        catch (ParseException ex) { }
             
         txtDNI.setText(empleado_.getDni());
         if ((empleado_.getSex()+"").equals("m")) {
@@ -67,8 +72,8 @@ public class dlgEmployee extends javax.swing.JDialog {
         }else if ((empleado_.getSex()+"").equals("f")) {
             rbFe.setSelected(true);  
         } 
-        txtdireccion.setText(empleado_.getPhone());
-        txttelefono.setText(empleado_.getCell_phone());
+        txttelefono.setText(empleado_.getPhone());
+        txtcelular.setText(empleado_.getCell_phone());
         txtcorreo.setText(empleado_.getEmail());
         
         comboCargo.setSelectedItem(cargo(empleado_.getPosition_idPosition()));
@@ -91,19 +96,15 @@ public class dlgEmployee extends javax.swing.JDialog {
         lblCodigo = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
-        lblDireccion = new javax.swing.JLabel();
         lblCorreo = new javax.swing.JLabel();
         lblDni = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         txtDNI = new javax.swing.JTextField();
         txtnombre = new javax.swing.JTextField();
         txtapellidoPa = new javax.swing.JTextField();
-        txtapellidoMa = new javax.swing.JTextField();
-        lblApellido1 = new javax.swing.JLabel();
         lblApellido2 = new javax.swing.JLabel();
         lblDni1 = new javax.swing.JLabel();
-        txtdireccion = new javax.swing.JTextField();
-        txttelefono = new javax.swing.JTextField();
+        txtcelular = new javax.swing.JTextField();
         txtcorreo = new javax.swing.JTextField();
         rbMas = new javax.swing.JRadioButton();
         rbFe = new javax.swing.JRadioButton();
@@ -111,12 +112,15 @@ public class dlgEmployee extends javax.swing.JDialog {
         lblTelefono1 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         comboCargo = new javax.swing.JComboBox();
+        txttelefono = new javax.swing.JTextField();
+        lblTelefono2 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
         btnGrabar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
 
@@ -130,11 +134,7 @@ public class dlgEmployee extends javax.swing.JDialog {
 
         lblApellido.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblApellido.setForeground(new java.awt.Color(255, 255, 255));
-        lblApellido.setText("Apellido Paterno");
-
-        lblDireccion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblDireccion.setForeground(new java.awt.Color(255, 255, 255));
-        lblDireccion.setText("Dirección");
+        lblApellido.setText("Apellido");
 
         lblCorreo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,7 +146,7 @@ public class dlgEmployee extends javax.swing.JDialog {
 
         lblTelefono.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTelefono.setForeground(new java.awt.Color(255, 255, 255));
-        lblTelefono.setText("Teléfono");
+        lblTelefono.setText("Celular:");
 
         txtDNI.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -169,17 +169,6 @@ public class dlgEmployee extends javax.swing.JDialog {
             }
         });
 
-        txtapellidoMa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        txtapellidoMa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtapellidoMaKeyTyped(evt);
-            }
-        });
-
-        lblApellido1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblApellido1.setForeground(new java.awt.Color(255, 255, 255));
-        lblApellido1.setText("Apellido Materno");
-
         lblApellido2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblApellido2.setForeground(new java.awt.Color(255, 255, 255));
         lblApellido2.setText("Fecha de Nacimiento");
@@ -188,17 +177,15 @@ public class dlgEmployee extends javax.swing.JDialog {
         lblDni1.setForeground(new java.awt.Color(255, 255, 255));
         lblDni1.setText("Sexo");
 
-        txtdireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        txttelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+        txtcelular.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txtcelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttelefonoActionPerformed(evt);
+                txtcelularActionPerformed(evt);
             }
         });
-        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtcelular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txttelefonoKeyTyped(evt);
+                txtcelularKeyTyped(evt);
             }
         });
 
@@ -220,48 +207,51 @@ public class dlgEmployee extends javax.swing.JDialog {
 
         lblId.setText("jLabel1");
 
+        txttelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefonoActionPerformed(evt);
+            }
+        });
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
+
+        lblTelefono2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTelefono2.setForeground(new java.awt.Color(255, 255, 255));
+        lblTelefono2.setText("Teléfono");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblApellido)
-                    .addComponent(lblNombre)
-                    .addComponent(lblCodigo))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtapellidoPa, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                        .addComponent(txtnombre))
-                    .addComponent(lblId))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDireccion)
-                    .addComponent(lblApellido2)
-                    .addComponent(lblCorreo))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lblApellido2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtdireccion)
-                            .addComponent(dateC, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(81, 81, 81)
+                            .addComponent(dateC, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblApellido1)
-                                    .addComponent(lblDni))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtapellidoMa)
-                                    .addComponent(txtDNI)))
+                                .addComponent(lblTelefono2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txttelefono))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblDni)
                                     .addComponent(lblDni1)
                                     .addComponent(lblTelefono)
                                     .addComponent(lblTelefono1))
@@ -271,46 +261,59 @@ public class dlgEmployee extends javax.swing.JDialog {
                                         .addComponent(rbMas)
                                         .addGap(18, 18, 18)
                                         .addComponent(rbFe))
-                                    .addComponent(txttelefono)
-                                    .addComponent(comboCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                                    .addComponent(txtcelular)
+                                    .addComponent(comboCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDNI))))
+                        .addContainerGap(26, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblId)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCorreo)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblApellido)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtapellidoPa, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(lblId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(lblCodigo)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblApellido)
                             .addComponent(txtapellidoPa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblApellido2)
                             .addComponent(dateC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDireccion)
-                            .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblCorreo)
+                            .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDni)
                             .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblApellido1)
-                            .addComponent(txtapellidoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDni1)
@@ -318,15 +321,17 @@ public class dlgEmployee extends javax.swing.JDialog {
                             .addComponent(rbFe))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelefono2)
+                            .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTelefono)
-                            .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCorreo)
-                    .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono1)
                     .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -401,9 +406,6 @@ public class dlgEmployee extends javax.swing.JDialog {
         }else if(txtapellidoPa.getText().trim().length()==0){
             JOptionPane.showMessageDialog(null, "Error en el ingreso del Apellido paterno",FactoryConnectionDb.Mensaje,JOptionPane.ERROR_MESSAGE);
             txtapellidoPa.requestFocus();
-        }else if(txtapellidoMa.getText().trim().length()==0){
-            JOptionPane.showMessageDialog(null, "Error en el ingreso del Apellido Materno",FactoryConnectionDb.Mensaje,JOptionPane.ERROR_MESSAGE);
-            txtapellidoMa.requestFocus();
         }else if(txtDNI.getText().trim().length()==0){
             JOptionPane.showMessageDialog(null, "Error en el ingreso del DNI",FactoryConnectionDb.Mensaje,JOptionPane.ERROR_MESSAGE);
             txtDNI.requestFocus();     
@@ -411,10 +413,10 @@ public class dlgEmployee extends javax.swing.JDialog {
             empleado_.setIdEmployee(Integer.parseInt(lblId.getText()));
             empleado_.setNameEmployee(txtnombre.getText());
             empleado_.setLast_name(txtapellidoPa.getText());
-            empleado_.setBirthdate((java.sql.Date) datE);
+            empleado_.setBirthdate(fechaC);
             empleado_.setDni(txtDNI.getText());
             empleado_.setSex((rbMas.isSelected())?"m":"f");
-            empleado_.setCell_phone(txtdireccion.getText());
+            empleado_.setCell_phone(txtcelular.getText());
             empleado_.setPhone(txttelefono.getText());
             empleado_.setEmail(txtcorreo.getText());
             empleado_.setPosition_idPosition(cargoId(comboCargo.getSelectedItem().toString()));
@@ -440,18 +442,18 @@ public class dlgEmployee extends javax.swing.JDialog {
           }         // TODO add your handling code here:
     }//GEN-LAST:event_txtDNIKeyTyped
 
-    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+    private void txtcelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcelularActionPerformed
         
-    }//GEN-LAST:event_txttelefonoActionPerformed
+    }//GEN-LAST:event_txtcelularActionPerformed
 
-    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+    private void txtcelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcelularKeyTyped
 char c=evt.getKeyChar(); 
           if(Character.isLetter(c)) { 
               getToolkit().beep(); 
               evt.consume(); 
               JOptionPane.showMessageDialog(this,"Ingresa Solo Numeros"); 
           }         // TODO add your handling code here:
-    }//GEN-LAST:event_txttelefonoKeyTyped
+    }//GEN-LAST:event_txtcelularKeyTyped
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
 char c=evt.getKeyChar(); 
@@ -462,15 +464,6 @@ char c=evt.getKeyChar();
           }         // TODO add your handling code here:
     }//GEN-LAST:event_txtnombreKeyTyped
 
-    private void txtapellidoMaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoMaKeyTyped
-char c=evt.getKeyChar(); 
-          if(Character.isDigit(c)) { 
-              getToolkit().beep(); 
-              evt.consume(); 
-              JOptionPane.showMessageDialog(this,"Ingresa Solo Letras"); 
-          }         // TODO add your handling code here:
-    }//GEN-LAST:event_txtapellidoMaKeyTyped
-
     private void txtapellidoPaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoPaKeyTyped
 char c=evt.getKeyChar(); 
           if(Character.isDigit(c)) { 
@@ -479,6 +472,14 @@ char c=evt.getKeyChar();
               JOptionPane.showMessageDialog(this,"Ingresa Solo Letras"); 
           }         // TODO add your handling code here:
     }//GEN-LAST:event_txtapellidoPaKeyTyped
+
+    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoActionPerformed
+
+    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoKeyTyped
 
         private void listarCargo(){
         List<cPosition> list = cargodao_.list("");
@@ -526,24 +527,22 @@ char c=evt.getKeyChar();
     private com.toedter.calendar.JDateChooser dateC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblApellido;
-    private javax.swing.JLabel lblApellido1;
     private javax.swing.JLabel lblApellido2;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblCorreo;
-    private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblDni1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTelefono1;
+    private javax.swing.JLabel lblTelefono2;
     private javax.swing.JRadioButton rbFe;
     private javax.swing.JRadioButton rbMas;
     private javax.swing.JTextField txtDNI;
-    private javax.swing.JTextField txtapellidoMa;
     private javax.swing.JTextField txtapellidoPa;
+    private javax.swing.JTextField txtcelular;
     private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables

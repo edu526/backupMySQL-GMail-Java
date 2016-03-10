@@ -17,7 +17,7 @@ public class DetailSaleDaoImp implements DetailSaleDao{
         List<cDetailSale> _list = new ArrayList<>();
         try
         {   StringBuilder query = new StringBuilder();
-            query.append("select * from DetailSale where idDetailSale like '").
+            query.append("select * from DetailSale where Sale_idSale like '").
                     append(q).append("' ORDER BY idDetailSale DESC");
             ResultSet rs = conn.query(query.toString());
             while(rs.next()) {

@@ -34,6 +34,8 @@ public class dlgProvider extends javax.swing.JDialog {
         txtnombre.setText(proveedor_.getNameProvider());
         txtDireccion.setText(proveedor_.getAddres());
         txttelefono.setText(proveedor_.getPhone());
+        txtcelular.setText(proveedor_.getCell_phone());
+        txtemail.setText(proveedor_.getEmail());
         txtdescripcion.setText(proveedor_.getDescription());
     }
 
@@ -53,6 +55,10 @@ public class dlgProvider extends javax.swing.JDialog {
         lblNombre2 = new javax.swing.JLabel();
         txttelefono = new javax.swing.JTextField();
         lblCod = new javax.swing.JLabel();
+        txtcelular = new javax.swing.JTextField();
+        lblNombre3 = new javax.swing.JLabel();
+        txtemail = new javax.swing.JTextField();
+        lblNombre4 = new javax.swing.JLabel();
         btnElminar = new javax.swing.JButton();
         btnGrabar = new javax.swing.JButton();
 
@@ -96,6 +102,28 @@ public class dlgProvider extends javax.swing.JDialog {
             }
         });
 
+        txtcelular.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txtcelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcelularKeyTyped(evt);
+            }
+        });
+
+        lblNombre3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNombre3.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre3.setText("Celular:");
+
+        txtemail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txtemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtemailKeyTyped(evt);
+            }
+        });
+
+        lblNombre4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNombre4.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre4.setText("email:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,16 +137,29 @@ public class dlgProvider extends javax.swing.JDialog {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(lblNombre2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblNombre1)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblNombre2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lblNombre4)
+                                                .addGap(28, 28, 28)
+                                                .addComponent(txtemail))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lblNombre3)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -149,11 +190,19 @@ public class dlgProvider extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombre2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre4))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCorreo)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnElminar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -202,7 +251,7 @@ public class dlgProvider extends javax.swing.JDialog {
                     .addComponent(btnGrabar)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(btnElminar)
-                    .addContainerGap(75, Short.MAX_VALUE)))
+                    .addContainerGap(148, Short.MAX_VALUE)))
         );
 
         pack();
@@ -238,8 +287,8 @@ public class dlgProvider extends javax.swing.JDialog {
             proveedor_.setAddres(txtDireccion.getText());
             proveedor_.setPhone(txttelefono.getText());
             proveedor_.setDescription(txtdescripcion.getText());
-            proveedor_.setCell_phone(txtdescripcion.getText());
-            proveedor_.setEmail(txtdescripcion.getText());
+            proveedor_.setCell_phone(txtcelular.getText());
+            proveedor_.setEmail(txtemail.getText());
             if(proveedor_.getIdProvider()>0){
                 proveedordao.update(proveedor_);                
                 JOptionPane.showMessageDialog(null, "Datos del proveedor modificados correctamente",FactoryConnectionDb.Mensaje,JOptionPane.INFORMATION_MESSAGE);
@@ -261,6 +310,14 @@ public class dlgProvider extends javax.swing.JDialog {
           } 
     }//GEN-LAST:event_txttelefonoKeyTyped
 
+    private void txtcelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcelularKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcelularKeyTyped
+
+    private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtemailKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnElminar;
     private javax.swing.JButton btnGrabar;
@@ -272,8 +329,12 @@ public class dlgProvider extends javax.swing.JDialog {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombre2;
+    private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblNombre4;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtcelular;
     private javax.swing.JTextArea txtdescripcion;
+    private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables

@@ -20,7 +20,6 @@ import Model.cDetailSale;
 import Model.cProduct;
 import Model.cUser;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 //import reporte.CReporte;
 
 public class frmSale extends javax.swing.JInternalFrame {     
@@ -416,12 +415,10 @@ public class frmSale extends javax.swing.JInternalFrame {
         String annio = Integer.toString(c.get(Calendar.YEAR));
 
         boleta_.setIdSale(numBoleta(""));
-        boleta_.setEmployee_idEmployee(Integer.parseInt(idCliente));
+        boleta_.setCustomer_idCustomer(Integer.parseInt(idCliente));
         boleta_.setEmployee_idEmployee(usu.getEmployee_idEmployee());
         
-        Date dat = Date.valueOf(annio+"-"+mes+"-"+dia);
-        
-        boleta_.setDate_buy(dat);
+        boleta_.setDate_buy(annio+"-"+mes+"-"+dia);
         boleta_.setPayment(Double.parseDouble(txttotal.getText()));
 
         boletadao.insert(boleta_);

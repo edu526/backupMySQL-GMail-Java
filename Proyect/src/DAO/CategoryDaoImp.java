@@ -60,10 +60,10 @@ public class CategoryDaoImp implements CategoryDao{
         boolean grabado = false;
             try{
                 StringBuilder sql = new StringBuilder();
-                sql.append("update category set ").
+                sql.append("update Category set ").
                 append("nameCategory='").append(p.getNameCategory()).append("',").
                 append("description='").append(p.getDescription()).append("'").
-                append(" where idCategoria=");sql.append(p.getIdCategory());                 
+                append(" where idCategory=");sql.append(p.getIdCategory());                 
                 this.conn.execute(sql.toString()); 
             }catch(Exception e){
                  e.printStackTrace();

@@ -6,7 +6,7 @@ public class cSale {
         
     private int idSale; //idboleta
     private double payment; // fecha
-    private Date date_buy; // id cliente 
+    private String date_buy; // id cliente 
     private int Customer_idCustomer;  // idempleado
     private int Employee_idEmployee;   //total
 
@@ -33,11 +33,11 @@ public class cSale {
         this.payment = payment;
     }
 
-    public Date getDate_buy() {
+    public String getDate_buy() {
         return date_buy;
     }
 
-    public void setDate_buy(Date date_buy) {
+    public void setDate_buy(String date_buy) {
         this.date_buy = date_buy;
     }
 

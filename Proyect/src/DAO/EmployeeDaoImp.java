@@ -21,6 +21,7 @@ public class EmployeeDaoImp implements EmployeeDao{
                     append(q).append("%' ORDER BY nameEmployee DESC");
             ResultSet rs = conn.query(query.toString());
             while(rs.next()) {
+                if(!"master".equals(rs.getString("nameEmployee"))){
                 cEmployee p = new cEmployee();
                 p.setIdEmployee(rs.getInt("idEmployee"));
                 p.setNameEmployee(rs.getString("nameEmployee"));
@@ -28,12 +29,12 @@ public class EmployeeDaoImp implements EmployeeDao{
                 p.setDni(rs.getString("dni"));
                 p.setCell_phone(rs.getString("cell_phone"));
                 p.setPhone(rs.getString("phone"));
-                p.setBirthdate(rs.getDate("birthdate"));
+                p.setBirthdate(rs.getString("birthdate"));
                 p.setEmail(rs.getString("email"));
                 p.setSex(rs.getString("sex"));
                 p.setPosition_idPosition(rs.getInt("Position_idPosition"));                
                 _list.add(p);
-                
+                }
             }
         }
         catch(Exception ex){
@@ -47,7 +48,7 @@ public class EmployeeDaoImp implements EmployeeDao{
         boolean grabado = false;
             try{
                 StringBuilder sql = new StringBuilder();
-                sql.append("insert into Customer (nameCustomer,last_name,dni,"
+                sql.append("insert into Employee (nameEmployee,last_name,dni,"
                         + "cell_phone,phone,birthdate,email,sex,Position_idPosition) "
                         + "values (");
                 sql.append("'"); sql.append(p.getNameEmployee());sql.append("',");
@@ -76,8 +77,8 @@ public class EmployeeDaoImp implements EmployeeDao{
         boolean grabado = false;
             try{
                 StringBuilder sql = new StringBuilder();
-                sql.append("update Customer set ").
-                append("nameCustomer='").append(p.getNameEmployee()).append("',").
+                sql.append("update Employee set ").
+                append("nameEmployee='").append(p.getNameEmployee()).append("',").
                 append("last_name='").append(p.getLast_name()).append("',").
                 append("dni='").append(p.getDni()).append("',").
                 append("cell_phone='").append(p.getCell_phone()).append("',").
@@ -129,7 +130,7 @@ public class EmployeeDaoImp implements EmployeeDao{
                 p.setDni(rs.getString("dni"));
                 p.setCell_phone(rs.getString("cell_phone"));
                 p.setPhone(rs.getString("phone"));
-                p.setBirthdate(rs.getDate("birthdate"));
+                p.setBirthdate(rs.getString("birthdate"));
                 p.setEmail(rs.getString("email"));
                 p.setSex(rs.getString("sex"));       
                 p.setPosition_idPosition(rs.getInt("Position_idPosition"));

@@ -49,7 +49,7 @@ public class ProductDaoImp implements ProductDao{
                 sql.append(p.getPrice());sql.append(",");
                 sql.append(p.getQuantity());sql.append(",");
                 sql.append(p.getCategory_idCategory());sql.append(",");
-                sql.append(p.getIdProduct());sql.append(")");                
+                sql.append(p.getProvider_idProvider());sql.append(")");                
                 
                 this.conn.execute(sql.toString()); 
             }catch(Exception e){

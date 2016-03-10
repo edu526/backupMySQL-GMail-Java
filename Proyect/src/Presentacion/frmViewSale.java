@@ -18,12 +18,12 @@ import Model.cCustomer;
  *
  * @author DEXTER0
  */
-public class frmVerBoletas extends javax.swing.JInternalFrame {
+public class frmViewSale extends javax.swing.JInternalFrame {
 
     SaleDao boletadao_ = new SaleDaoImp();
     CustomerDao clientedao_ = new CustomerDaoImp();
     Object[][] o;
-    public frmVerBoletas() {
+    public frmViewSale() {
         initComponents();
         
         setTitle("Ver Boletas"); //titulo del software

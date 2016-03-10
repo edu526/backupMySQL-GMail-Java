@@ -69,7 +69,7 @@ public class ProviderDaoImp implements ProviderDao{
         boolean grabado = false;
             try{
                 StringBuilder sql = new StringBuilder();
-                sql.append("update Provide set ").
+                sql.append("update Provider set ").
                 append("nameProvider='").append(p.getNameProvider()).append("',").
                 append("addres='").append(p.getAddres()).append("',").
                 append("cell_phone='").append(p.getCell_phone()).append("',").
@@ -119,8 +119,8 @@ public class ProviderDaoImp implements ProviderDao{
                 p.setAddres(rs.getString("addres"));
                 p.setCell_phone(rs.getString("cell_phone"));
                 p.setPhone(rs.getString("phone"));
-                p.setCell_phone(rs.getString("description"));
-                p.setPhone(rs.getString("email"));                   
+                p.setDescription(rs.getString("description"));
+                p.setEmail(rs.getString("email"));                   
              }
          }catch(Exception e){
              e.printStackTrace();

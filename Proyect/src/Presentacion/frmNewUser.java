@@ -341,11 +341,14 @@ public class frmNewUser extends javax.swing.JInternalFrame {
     }
     private void listarEmpleados(String texto){
         List<cEmployee> list = empleadodao_.list(texto);
+        List<cUser> listu = usuariodao_.list();
+        
         e =new Object[4][list.size()];
         int i = 0;
-        for (cEmployee tr : list) { 
+        for (cEmployee tr : list) {
+            for(cUser tu : listu){
             if(Categoria==1){
-                if(!existe(tr.getIdEmployee())){
+                if(tr.getIdEmployee()!= tu.getEmployee_idEmployee()){
                 e[0][i]=tr.getIdEmployee();
                 e[1][i]=tr.getNameEmployee();
                 e[2][i]=tr.getLast_name();
@@ -353,7 +356,7 @@ public class frmNewUser extends javax.swing.JInternalFrame {
                 i++;
                 }
             }else if(Categoria==2){
-                if(existe(tr.getIdEmployee())){
+                if(tr.getIdEmployee()== tu.getEmployee_idEmployee() && !"master".equals(tu.getUser())){
                 e[0][i]=tr.getIdEmployee();
                 e[1][i]=tr.getNameEmployee();
                 e[2][i]=tr.getLast_name();
@@ -361,7 +364,7 @@ public class frmNewUser extends javax.swing.JInternalFrame {
                 i++;
                 }
             }
-            
+            }
         }
         
         DefaultTableModel modelo=new DefaultTableModel(){

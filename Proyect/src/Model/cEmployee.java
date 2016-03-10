@@ -10,7 +10,7 @@ public class cEmployee {
     private String dni;         
     private String cell_phone;  
     private String phone;       
-    private Date birthdate;     
+    private String birthdate;     
     private String email;   	
     private String sex;   	
     private int Position_idPosition;
@@ -67,11 +67,11 @@ public class cEmployee {
         this.phone = phone;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
