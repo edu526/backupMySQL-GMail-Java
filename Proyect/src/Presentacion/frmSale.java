@@ -20,7 +20,6 @@ import Model.cCustomer;
 import Model.cDetailSale;
 import Model.cProduct;
 import Model.cUser;
-import java.sql.Date;
 //import reporte.CReporte;
 
 public class frmSale extends javax.swing.JInternalFrame {     
@@ -33,7 +32,8 @@ public class frmSale extends javax.swing.JInternalFrame {
     
     String idCliente;   
     String nombreProducto;
-    int idProducto;
+    int idProducto = -1;
+    int cantidad;
     double precio;
     double prePorCantidad;
     
@@ -64,7 +64,7 @@ public class frmSale extends javax.swing.JInternalFrame {
         dtmVenta.addColumn("Total");
         
         tablaVenta.setModel(dtmVenta);
-        txtnro.setText(numBoleta("")+"");
+        txtnro.setText((numBoleta("")+1)+"");
         }
 
     @SuppressWarnings("unchecked")
@@ -212,6 +212,7 @@ public class frmSale extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cantidad:");
 
+        txtcantidad.setText("0");
         txtcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtcantidadKeyTyped(evt);
@@ -403,6 +404,7 @@ public class frmSale extends javax.swing.JInternalFrame {
         idProducto=Integer.parseInt(tablaProducto.getValueAt(tablaProducto.getSelectedRow(),0).toString());
         nombreProducto=tablaProducto.getValueAt(tablaProducto.getSelectedRow(),1).toString();
         precio = Double.parseDouble(tablaProducto.getValueAt(tablaProducto.getSelectedRow(),3).toString());
+        cantidad =Integer.parseInt(tablaProducto.getValueAt(tablaProducto.getSelectedRow(),2).toString());
     }//GEN-LAST:event_tablaProductoMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -416,7 +418,7 @@ public class frmSale extends javax.swing.JInternalFrame {
                 usu.setUser(FactoryConnectionDb.user);
                 usu.setPass(FactoryConnectionDb.pass);
                 usu.setEmployee_idEmployee(FactoryConnectionDb.idEmployee);
-                usu.setIdUser(Integer.parseInt(FactoryConnectionDb.idUser));
+                usu.setIdUser(FactoryConnectionDb.idUser);
         Calendar c = Calendar.getInstance();
         
         ProductDao productodao = new ProductDaoImp();
@@ -433,29 +435,22 @@ public class frmSale extends javax.swing.JInternalFrame {
         boleta_.setPayment(Double.parseDouble(txttotal.getText()));
 
         boletadao.insert(boleta_);
-
         
         for (int i = 0; i < numFila; i++) {
-            
             DetailSaleDao detalledao = new DetailSaleDaoImp();
             cDetailSale detalle_ = new cDetailSale();
             
-            detalle_.setSale_idSale(numBoleta(""));
+            detalle_.setSale_idSale(numBoleta("")+1);
             detalle_.setIdDetailSale(i);
             detalle_.setProduct_idProduct(Integer.parseInt(tablaVenta.getValueAt(i,0).toString()));
             detalle_.setPrice(Double.parseDouble(tablaVenta.getValueAt(i,4).toString()));
             detalle_.setQuantity(Integer.parseInt(tablaVenta.getValueAt(i,3).toString()));
-            
             productodao.subtractStock(detalle_.getProduct_idProduct(),detalle_.getQuantity());
-            
             detalledao.insert(detalle_);
-            
         }
-        
         JOptionPane.showMessageDialog(null, "Boleta grabada satisfactoriamente",
                 FactoryConnectionDb.Mensaje,JOptionPane.INFORMATION_MESSAGE);
 //        new CReporte().imprimirBoleta(boleta_.getIdBoleta());
-        
         limpiar();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -471,12 +466,23 @@ public class frmSale extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnquitarActionPerformed
 
     private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
-        if(Integer.parseInt(txtcantidad.getText())>0 && idProducto>0 && txtCliente.getText().length()>0){
-            prePorCantidad = precio*Double.parseDouble(txtcantidad.getText());
-            dtmVenta.addRow(new Object[]{idProducto,nombreProducto,precio,txtcantidad.getText(),prePorCantidad});
-            preciototal();
-            txtcantidad.setText("");
-        }
+        
+            if(txtCliente.getText().length()<1)
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un cliente");
+            else if(idProducto<0)
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un producto");
+            else if(Integer.parseInt(txtcantidad.getText())>cantidad)
+                JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad valida");
+            
+            else if(Integer.parseInt(txtcantidad.getText())<1)
+                JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad superior a cero");
+            else{
+                prePorCantidad = precio*Double.parseDouble(txtcantidad.getText());
+                dtmVenta.addRow(new Object[]{idProducto,nombreProducto,precio,txtcantidad.getText(),prePorCantidad});
+                preciototal();
+                txtcantidad.setText("0");
+                idProducto = -1;
+            }
     }//GEN-LAST:event_btnagregarActionPerformed
 
     private void tablaVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentaMouseClicked
@@ -485,8 +491,8 @@ public class frmSale extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaVentaMouseClicked
 
     private void txtcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidadKeyTyped
-char c=evt.getKeyChar(); 
-          if(Character.isLetter(c)) { 
+            char c=evt.getKeyChar(); 
+                if(Character.isLetter(c)) { 
               getToolkit().beep(); 
               evt.consume(); 
               JOptionPane.showMessageDialog(this,"Ingresa Solo Numeros"); 
@@ -505,7 +511,7 @@ char c=evt.getKeyChar();
             dtmVenta.removeRow(0);
         }
         txtCliente.setText("");
-        txtcantidad.setText("");
+        txtcantidad.setText("0");
         txtnro.setText(numBoleta("")+"");
         idCliente="";   
         nombreProducto="";

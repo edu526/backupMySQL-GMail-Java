@@ -133,7 +133,7 @@ public class frmChangePassword extends javax.swing.JInternalFrame {
                 usu.setUser(FactoryConnectionDb.user);
                 usu.setPass(FactoryConnectionDb.pass);
                 usu.setEmployee_idEmployee(FactoryConnectionDb.idEmployee);
-                usu.setIdUser(Integer.parseInt(FactoryConnectionDb.idUser));
+                usu.setIdUser(FactoryConnectionDb.idUser);
        
         boolean existe = false;
         if(usu.getPass().equals(DAO.MD5.getMD5(sClave))){

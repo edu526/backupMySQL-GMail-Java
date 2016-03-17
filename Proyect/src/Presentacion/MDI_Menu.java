@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 //import reporte.CReporte;
 
@@ -48,6 +49,12 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
         
         this.add(fondo, BorderLayout.CENTER);        
+        
+        if(Factory.FactoryConnectionDb.idCargo !=0){
+            menuCargo.setVisible(false);
+            
+        }
+        
     }
 
     
@@ -66,8 +73,8 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         jToolBar2 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCliente = new javax.swing.JMenu();
         menuClienteControl = new javax.swing.JMenuItem();
@@ -194,18 +201,6 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
         });
         jToolBar2.add(jButton6);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        jButton4.setText("Salir");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(jButton4);
-
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar_sesion.png"))); // NOI18N
         jButton8.setText("Cerrar Sesión");
         jButton8.setFocusable(false);
@@ -217,6 +212,18 @@ public class MDI_Menu extends javax.swing.JFrame implements Runnable{
             }
         });
         jToolBar2.add(jButton8);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
+        jButton4.setText("Salir");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
 
         javax.swing.GroupLayout panel_principalLayout = new javax.swing.GroupLayout(panel_principal);
         panel_principal.setLayout(panel_principalLayout);

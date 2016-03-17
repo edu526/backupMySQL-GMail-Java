@@ -1,5 +1,7 @@
 package Presentacion;
 
+import DAO.EmployeeDao;
+import DAO.EmployeeDaoImp;
 import java.util.ResourceBundle;
 import javax.swing.*;
 
@@ -8,11 +10,10 @@ import DAO.UserDaoImp;
 import Ejecucion.Control;
 import Ejecucion.NewMain;
 import Factory.FactoryConnectionDb;
+import Model.cEmployee;
 import java.util.List;
 import Model.cUser;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class access extends javax.swing.JFrame {
      
@@ -118,12 +119,12 @@ public class access extends javax.swing.JFrame {
                                 .addComponent(lblUsuario)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblAcceso)
@@ -134,15 +135,12 @@ public class access extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(lblAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(118, 118, 118)
-                                .addComponent(btnEntrar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -152,10 +150,11 @@ public class access extends javax.swing.JFrame {
                                 .addGap(88, 88, 88)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblContraseña)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(118, 118, 118)
-                                .addComponent(btnSalir)))))
+                                    .addComponent(lblContraseña))))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSalir)
+                            .addComponent(btnEntrar))))
                 .addGap(81, 81, 81))
         );
 
@@ -191,16 +190,22 @@ public class access extends javax.swing.JFrame {
             UserDao _usuario = new UserDaoImp();
             List<cUser> _list = _usuario.list();
             boolean existe = false;
-
+            EmployeeDao _employee = new EmployeeDaoImp();
+            List<cEmployee> _listE = _employee.list("");
             for (cUser us : _list) {
                 if(us.getUser().equals(usuario_)&& us.getPass().equals(DAO.MD5.getMD5(clave_)) ){
                     existe = true;
                     FactoryConnectionDb.user = us.getUser();
-                    FactoryConnectionDb.idUser = us.getIdUser()+"";
+                    FactoryConnectionDb.idUser = us.getIdUser();
                     FactoryConnectionDb.idEmployee = us.getEmployee_idEmployee();
                     FactoryConnectionDb.pass = us.getPass();
+                    
                     break;
                 }
+            }
+            for(cEmployee em : _listE){
+                if(em.getIdEmployee() == FactoryConnectionDb.idEmployee)
+                    FactoryConnectionDb.idCargo=em.getPosition_idPosition();
             }
             if(existe){
 
