@@ -2,6 +2,7 @@
 package Presentacion;
 import DAO.ProviderDao;
 import DAO.ProviderDaoImp;
+import Model.cBloqueroVentanas;
 import java.awt.BorderLayout;
 import java.util.List;
 
@@ -69,12 +70,11 @@ public class frmProvider extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnnuevo = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
+        btnnuevo1 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setClosable(true);
-        setIconifiable(true);
         setTitle("Proveedor");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,14 +108,23 @@ public class frmProvider extends javax.swing.JInternalFrame {
             }
         });
 
+        btnnuevo1.setText("Cerrar");
+        btnnuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnuevo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(395, Short.MAX_VALUE)
+                .addContainerGap(369, Short.MAX_VALUE)
                 .addComponent(btnnuevo)
-                .addGap(99, 99, 99))
+                .addGap(18, 18, 18)
+                .addComponent(btnnuevo1)
+                .addGap(44, 44, 44))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -131,8 +140,10 @@ public class frmProvider extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnnuevo)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnnuevo)
+                    .addComponent(btnnuevo1))
+                .addContainerGap(268, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -164,10 +175,16 @@ public class frmProvider extends javax.swing.JInternalFrame {
         listar(txtbuscar.getText().trim());
     }//GEN-LAST:event_txtbuscarKeyReleased
 
+    private void btnnuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevo1ActionPerformed
+        cBloqueroVentanas.setViewProveedor(true);
+        dispose();
+    }//GEN-LAST:event_btnnuevo1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnnuevo1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -2,6 +2,7 @@ package Presentacion;
 
 import DAO.EmployeeDao;
 import DAO.EmployeeDaoImp;
+import Model.cBloqueroVentanas;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.*;
@@ -37,10 +38,9 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
         jTable1 = new javax.swing.JTable();
         btnnuevo = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
+        btnnuevo1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setClosable(true);
-        setIconifiable(true);
         setTitle("Empleado");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -74,6 +74,13 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
             }
         });
 
+        btnnuevo1.setText("Cerrar");
+        btnnuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnuevo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,7 +95,9 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnnuevo)
-                        .addGap(116, 116, 116))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnnuevo1)
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,10 +105,11 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnnuevo1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,6 +133,11 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
         if(txtbuscar.getText().trim().length()>0)
         listar(txtbuscar.getText().trim());
     }//GEN-LAST:event_txtbuscarKeyReleased
+
+    private void btnnuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevo1ActionPerformed
+        cBloqueroVentanas.setViewControlEmpleado(true);
+        dispose();
+    }//GEN-LAST:event_btnnuevo1ActionPerformed
 
      private void listar(String texto){
         List<cEmployee> list = empleadodao_.list(texto);
@@ -156,6 +171,7 @@ EmployeeDao empleadodao_ = new EmployeeDaoImp();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnnuevo1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

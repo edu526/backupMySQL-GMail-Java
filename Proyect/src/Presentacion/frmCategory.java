@@ -2,6 +2,7 @@
 package Presentacion;
 import DAO.CategoryDao;
 import DAO.CategoryDaoImp;
+import Model.cBloqueroVentanas;
 import java.awt.BorderLayout;
 import java.util.List;
 
@@ -39,12 +40,11 @@ public class frmCategory extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnnuevo = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
+        btnnuevo1 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setClosable(true);
-        setIconifiable(true);
         setTitle("Categoria");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -78,6 +78,13 @@ public class frmCategory extends javax.swing.JInternalFrame {
             }
         });
 
+        btnnuevo1.setText("Cerrar");
+        btnnuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnuevo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +99,9 @@ public class frmCategory extends javax.swing.JInternalFrame {
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnnuevo)
-                        .addGap(116, 116, 116))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnnuevo1)
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,10 +109,11 @@ public class frmCategory extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnnuevo1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,6 +137,11 @@ public class frmCategory extends javax.swing.JInternalFrame {
         if(txtbuscar.getText().trim().length()>0)
         listar(txtbuscar.getText().trim());
     }//GEN-LAST:event_txtbuscarKeyReleased
+
+    private void btnnuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevo1ActionPerformed
+        cBloqueroVentanas.setViewCategoria(true);
+        dispose();
+    }//GEN-LAST:event_btnnuevo1ActionPerformed
 private void listar(String texto){
         List<cCategory> list = categoriadao_.list(texto);
         o =new Object[3][list.size()];
@@ -159,6 +174,7 @@ private void listar(String texto){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnnuevo1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -5,9 +5,14 @@ import javax.swing.*;
 
 import DAO.UserDao;
 import DAO.UserDaoImp;
+import Ejecucion.Control;
+import Ejecucion.NewMain;
 import Factory.FactoryConnectionDb;
 import java.util.List;
 import Model.cUser;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class access extends javax.swing.JFrame {
      
@@ -165,7 +170,13 @@ public class access extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
+        Ejecucion.NewMain ne = new NewMain();
+        try {
+            ne.mysql_stop();
+            new Control().cerrarApp();          
+        } catch (IOException | InterruptedException ex) {
+        }
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed

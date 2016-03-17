@@ -8,6 +8,7 @@ package Presentacion;
 import Factory.FactoryConnectionDb;
 import DAO.UserDao;
 import DAO.UserDaoImp;
+import Model.cBloqueroVentanas;
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -47,9 +48,8 @@ public class frmChangePassword extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setClosable(true);
 
-        btnSalir.setText("Salir");
+        btnSalir.setText("Cerrar");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -121,6 +121,7 @@ public class frmChangePassword extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        cBloqueroVentanas.setViewCanbiarContrasenia(true);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 

@@ -9,6 +9,7 @@ import DAO.DetailSaleDao;
 import DAO.DetailSaleDaoImp;
 import DAO.ProductDao;
 import DAO.ProductDaoImp;
+import Model.cBloqueroVentanas;
 import java.awt.BorderLayout;
 import java.util.Calendar;
 import java.util.List;
@@ -89,6 +90,7 @@ public class frmSale extends javax.swing.JInternalFrame {
         txtbuscarProducto = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaVenta = new javax.swing.JTable();
+        btnquitar1 = new javax.swing.JButton();
         txtCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -149,8 +151,6 @@ public class frmSale extends javax.swing.JInternalFrame {
         );
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setClosable(true);
-        setIconifiable(true);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(2000, 32767));
         jPanel1.setOpaque(false);
@@ -242,6 +242,13 @@ public class frmSale extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(tablaVenta);
 
+        btnquitar1.setText("Cerrar");
+        btnquitar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnquitar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -273,6 +280,9 @@ public class frmSale extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar)
                 .addGap(134, 134, 134))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnquitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +308,8 @@ public class frmSale extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10)
                     .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(btnquitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -482,6 +493,11 @@ char c=evt.getKeyChar();
           }         // TODO add your handling code here:
     }//GEN-LAST:event_txtcantidadKeyTyped
 
+    private void btnquitar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquitar1ActionPerformed
+        cBloqueroVentanas.setViewVenta(true);
+        dispose();
+    }//GEN-LAST:event_btnquitar1ActionPerformed
+
     public void limpiar(){
         int numFila= tablaVenta.getRowCount();
 
@@ -583,6 +599,7 @@ char c=evt.getKeyChar();
     private javax.swing.JButton btnagregar;
     private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnquitar;
+    private javax.swing.JButton btnquitar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
