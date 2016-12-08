@@ -38,9 +38,9 @@ public class NewMain {
         String rutaArchivo="";
         String nombreArchivo="";
         String asunto="";
-        String usuarioCorreo = "algoritmolibre@gmail.com";
-        String password = "eduardo5265807";
-        String destinatario = "algoritmolibre@gmail.com";
+        String usuarioCorreo = "example@gmail.com";
+        String password = "password";
+        String destinatario = "example@gmail.com";
         String mensaje = "Copia de seguridad de Base de Datos";
         
                 rutaArchivo =System.getProperty("user.dir")+"/src/backup/backup/proyect.sql" ;
