@@ -38,7 +38,7 @@ public class Env_Email { String usuarioCorreo;
         try
         {
             Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.host", "smtp.gmail.com");     //smtp.gmail.com servidor de correo, del remitente.   
             props.setProperty("mail.smtp.starttls.enable", "true");
             props.setProperty("mail.smtp.port", "587");
             props.setProperty("mail.smtp.user", usuarioCorreo);
